@@ -1,0 +1,7 @@
+{
+  "name": "yummyWeather",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
