@@ -16,6 +16,7 @@ export class PlacesPage implements OnInit, OnDestroy {
   places: any[] = [];
   query: string;
   placesSubscription: Subscription;
+  loading = true;
   private _places = new BehaviorSubject<any[]>([]);
 
   get search_places() {
@@ -39,6 +40,7 @@ export class PlacesPage implements OnInit, OnDestroy {
     console.log(event);
     this.query = event.detail.value;
     if(this.query.length > 0) await this.getPlaces();
+    this.loading = false;
   }
 
   async getPlaces() {

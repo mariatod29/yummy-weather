@@ -24,12 +24,9 @@ export class WeatherPage {
 
   loadData() {
     this.httpClient.get(`${API_URL}weather?q=${this.cityName}&appid=${API_KEY}`).subscribe(results => {
-      console.log(results);
       this.weatherTemperature = results['main'];
       this.name = results['name'];
-      console.log(this.weatherTemperature);
       this.weatherDetails = results['weather'][0];
-      console.log(this.weatherDetails);
       this.icon = `https://openweathermap.org/img/wn/${this.weatherDetails.icon}@2x.png`;
       this.loading = false;
     });

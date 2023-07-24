@@ -4,7 +4,7 @@
   </ion-toolbar>
   <ion-toolbar>
     <ion-searchbar 
-      debounce="800"
+      debounce="700"
       placeholder="Suche nach Standorte, Straßen..."
       (ionChange)="onSearchChange($event)"
       animated>
@@ -13,19 +13,23 @@
 </ion-header>
 
 <ion-content>
+  <div *ngIf="!loading">
+    <ion-list *ngIf="places?.length > 0">
+      <ion-item *ngFor="let place of places" class="ion-margin-top">
+        <ion-icon name="location-outline" slot="start"></ion-icon>
+        <ion-label>
+          {{ place?.title }}
+          <p>
+            <ion-text>
+              {{ place?.address }}
+            </ion-text>
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
 
-  <ion-list *ngIf="places?.length > 0">
-    <ion-item *ngFor="let place of places" class="ion-margin-top">
-      <ion-icon name="location-outline" slot="start"></ion-icon>
-      <ion-label>
-        {{ place?.title }}
-        <p>
-          <ion-text>
-            {{ place?.address }}
-          </ion-text>
-        </p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
-
+  <div *ngIf="loading" style="display: flex; height: 80vh; justify-content: center; align-items: center;">
+    <span style="text-align: center; font-weight: 400px; font-size: 1.3em;">Keine Daten vorhanden.</span>
+  </div>
 </ion-content>
