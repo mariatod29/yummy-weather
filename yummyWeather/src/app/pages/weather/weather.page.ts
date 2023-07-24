@@ -9,28 +9,34 @@ const API_KEY = environment.API_KEY;
   templateUrl: './weather.page.html',
   styleUrls: ['./weather.page.scss'],
 })
-export class WeatherPage implements OnInit {
-  weatherTemperature: any;
+export class WeatherPage {
   todayDate = new Date();
-  cityName: any;
-  weatherIcon: any;
+  cityName = '';
+  weatherTemperature: any;
   weatherDetails: any;
+  icon: any;
+  name = '';
+  loading = true;
 
   constructor(public httpClient: HttpClient) { 
-    this.loadData();
+    // this.loadData();
   }
 
   loadData() {
-    this.httpClient.get(`${API_URL}weather?q=${'Magdeburg'}&appid=${API_KEY}`).subscribe(results => {
+    this.httpClient.get(`${API_URL}weather?q=${this.cityName}&appid=${API_KEY}`).subscribe(results => {
       console.log(results);
       this.weatherTemperature = results['main'];
-      this.cityName = results['name'];
+      this.name = results['name'];
+      console.log(this.weatherTemperature);
       this.weatherDetails = results['weather'][0];
       console.log(this.weatherDetails);
-      this.weatherIcon = `https://openweathermap.org/img/wn/${this.weatherDetails.icon}@2x.png`;
+      this.icon = `https://openweathermap.org/img/wn/${this.weatherDetails.icon}@2x.png`;
+      this.loading = false;
     });
   }
-  ngOnInit() {
+
+  loader() {
+
   }
 
 }

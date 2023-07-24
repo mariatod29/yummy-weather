@@ -1,16 +1,13 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title class="ion-text-center">Standorte</ion-title>
+    <ion-title class="ion-text-center" style="font-weight: 400; font-size: 1.4em; font-weight: bold;">Standorte</ion-title>
   </ion-toolbar>
   <ion-toolbar>
     <ion-searchbar 
-      search-icon="search-circle"
-      animated="true"
-      show-clear-button="focus"
-      clear-icon="trash-bin"
       debounce="800"
       placeholder="Suche nach Standorte, Straßen..."
-      (ionChange)="onSearchChange($event)">
+      (ionChange)="onSearchChange($event)"
+      animated>
     </ion-searchbar>
   </ion-toolbar>
 </ion-header>

@@ -1,44 +1,73 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title class="ion-text-center">Wetter</ion-title>
+    <div style="text-align: center;margin: 15px;">
+      <ion-label style="font-weight: 400; font-size: 1.4em; font-weight: bold;">Wetter</ion-label>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <ion-item>
-      <ion-icon name="sunny-outline"></ion-icon>
-      <ion-label>Heutiger Wetterbericht:</ion-label>
-      <ion-label slot="end">{{ todayDate | date: "EEE dd MMM"}}</ion-label>
-    </ion-item>
+  <div>
+    <ion-searchbar 
+      [(ngModel)]="cityName"
+      (ngModelChange) = "loadData()"
+      class="searchBar"
+      placeholder="Suche nach einer Stadt" 
+      animated>
+    </ion-searchbar>
+  </div>
 
-    <ion-item>
-      <ion-icon name="location"></ion-icon>
-      <p>Stadt: </p>
-      <ion-label slot="end">{{cityName}}</ion-label>
-    </ion-item>
+  <div *ngIf="!loading">
+    <ion-card class="cardStyle">
+      <ion-item>
+        <ion-icon name="sunny-outline"></ion-icon>
+        <span>
+          <ion-label class="ion-label">Heutiger Wetterbericht:</ion-label>
+        </span>
+        <ion-label slot="end">{{ todayDate | date: "EEE dd MMM"}}</ion-label>
+      </ion-item>
 
-    <ion-item>
-      <ion-icon name="thermometer-outline"></ion-icon>
-      <span>{{ (weatherTemperature?.temp - 273.15).toFixed(0)}}°C</span>
-      <img slot="end" [src]=weatherIcon>
-    </ion-item>
-  </ion-card>
+      <ion-item>
+        <ion-icon name="location"></ion-icon>
+        <span>
+          <ion-label class="ion-label">Stadt:</ion-label>
+        </span>
+        <ion-label slot="end">{{cityName}}</ion-label>
+      </ion-item>
 
-  <ion-card>
-    <ion-item>
-      <span>Maximale Temperatur: </span>
-      <span slot="end">{{ (weatherTemperature.temp_max - 273.15).toFixed(0)}}°C</span>
-    </ion-item>
+      <ion-item>
+        <ion-icon name="thermometer-outline"></ion-icon>
+        <span>
+          <ion-label class="ion-label" style="font-size: 1.8em;">{{ (weatherTemperature?.temp - 273.15).toFixed(0)}}°C</ion-label>
+        </span>
+        <img slot="end" [src]=icon>
+      </ion-item>
+    </ion-card>
 
-    <ion-item>
-      <span>Minimale Temperatur: </span>
-      <span slot="end">{{ (weatherTemperature.temp_min - 273.15).toFixed(0)}}°C</span>
-    </ion-item>
+    <ion-card class="cardStyle">
+      <ion-item>
+        <span>
+          <ion-label class="ion-label">Maximale Temperatur: </ion-label>
+        </span>
+        <span slot="end">{{ (weatherTemperature.temp_max - 273.15).toFixed(0)}}°C</span>
+      </ion-item>
 
-    <ion-item>
-      <span>Luftfeuchtigkeit: </span>
-      <span slot="end">{{ weatherTemperature.humidity }}%</span>
-    </ion-item>
-  </ion-card>
+      <ion-item>
+        <span>
+          <ion-label class="ion-label">Minimale Temperatur: </ion-label>
+        </span>
+        <span slot="end">{{ (weatherTemperature.temp_min - 273.15).toFixed(0)}}°C</span>
+      </ion-item>
+
+      <ion-item>
+        <span>
+          <ion-label class="ion-label">Luftfeuchtigkeit: </ion-label>
+        </span>
+        <span slot="end">{{ weatherTemperature.humidity }}%</span>
+      </ion-item>
+    </ion-card>
+  </div>
+  <div *ngIf="loading" style="display: flex; height: 80vh; justify-content: center; align-items: center;">
+    <span style="text-align: center; font-weight: 400px; font-size: 1.3em;">Keine Daten vorhanden.</span>
+  </div>
 </ion-content>
