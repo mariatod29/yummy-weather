@@ -4,9 +4,8 @@
 
 export const environment = {
   production: false,
-  apiKey: 'AIzaSyAFBrwWYmIFjhxT6FDh2kD73ovJBUmEKiQ',
-  baseUrl: 'https://maps.googleapis.com/maps',
-  images: 'https://developers.google.com/maps/documentation/places/web-service/photos',
+  API_KEY: 'acea3d6d6197361006501603a54e18eb',
+  API_URL: 'https://api.openweathermap.org/data/2.5/',
 };
 
 /*

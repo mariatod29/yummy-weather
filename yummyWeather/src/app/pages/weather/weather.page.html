@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center">Wetter</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-item>
+      <ion-icon name="sunny-outline"></ion-icon>
+      <ion-label>Heutiger Wetterbericht:</ion-label>
+      <ion-label slot="end">{{ todayDate | date: "EEE dd MMM"}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="location"></ion-icon>
+      <p>Stadt: </p>
+      <ion-label slot="end">{{cityName}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="thermometer-outline"></ion-icon>
+      <span>{{ (weatherTemperature?.temp - 273.15).toFixed(0)}}°C</span>
+      <img slot="end" [src]=weatherIcon>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-item>
+      <span>Maximale Temperatur: </span>
+      <span slot="end">{{ (weatherTemperature.temp_max - 273.15).toFixed(0)}}°C</span>
+    </ion-item>
+
+    <ion-item>
+      <span>Minimale Temperatur: </span>
+      <span slot="end">{{ (weatherTemperature.temp_min - 273.15).toFixed(0)}}°C</span>
+    </ion-item>
+
+    <ion-item>
+      <span>Luftfeuchtigkeit: </span>
+      <span slot="end">{{ weatherTemperature.humidity }}%</span>
+    </ion-item>
+  </ion-card>
+</ion-content>
